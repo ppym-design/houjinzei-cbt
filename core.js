@@ -11,11 +11,16 @@ function grade(q,answers={}){
   const remaining=group.map(k=>String(q.answers[k]));
   for(const k of group){grouped.add(k);const index=remaining.indexOf(String(answers[k]||''));result[k]=index>=0;if(index>=0)remaining.splice(index,1)}
  }
- for(const k of keys(q)){if(!grouped.has(k))result[k]=normalize(answers[k])===normalize(q.answers[k])}
+ for(const k of keys(q)){if(!grouped.has(k))result[k]=(q.acceptedAnswers?.[k]||[q.answers[k]]).some(v=>normalize(answers[k])===normalize(v))}
  return result;
 }
 function completion(q,answers={}){const total=keys(q).length;const done=keys(q).filter(k=>answered(answers[k])).length;return {total,done,complete:done===total}}
 function label(q,k,value){if(!answered(value))return '未解答';if(k.startsWith('('))return value;return (Array.isArray(value)?value:String(value).split(',')).map(v=>`${v}. ${options(q,k)[Number(v)-1]||''}`).join(' ／ ')}
+function migrateSession(s){
+ const value=s?.answers?.[18]?.['2-H'];
+ if(Array.isArray(value)&&value.every(v=>['5','8'].includes(v))&&new Set(value).size===value.length){s.answers[18]['2-H']=value.includes('8')?'8':value[0]||''}
+ return s;
+}
 function validateSession(s,questions){
  if(!s||s.schema!==1||!Array.isArray(s.ids)||!s.ids.length||new Set(s.ids).size!==s.ids.length||s.ids.some(id=>!questions.find(q=>q.id===id)))return false;
  if(!s.answers||typeof s.answers!=='object'||Array.isArray(s.answers)||!s.flags||typeof s.flags!=='object')return false;
@@ -27,5 +32,5 @@ function validateSession(s,questions){
  }
  return true;
 }
-const api={keys,options,values,normalize,answered,grade,completion,label,validateSession};root.ExamCore=api;if(typeof module!=='undefined')module.exports=api;
+const api={migrateSession,keys,options,values,normalize,answered,grade,completion,label,validateSession};root.ExamCore=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
