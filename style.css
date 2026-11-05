@@ -38,3 +38,5 @@
 .matching-group .field:last-child{border-bottom:0;padding-bottom:2px}
 .matching-group .field label{font-size:12px}
 @media(max-width:720px){.matching-fields{display:block}}
+
+.provided-explanation{border-top:2px solid var(--line);margin-top:35px;padding-top:22px}.provided-explanation h3{font-size:16px;color:var(--teal)}
