@@ -40,3 +40,19 @@
 @media(max-width:720px){.matching-fields{display:block}}
 
 .provided-explanation{border-top:2px solid var(--line);margin-top:35px;padding-top:22px}.provided-explanation h3{font-size:16px;color:var(--teal)}
+
+/* Written questions: independently scrollable question and answer sheet. */
+.center.written-center,.review-mode .center.written-center{grid-template-rows:auto minmax(0,.8fr) minmax(0,1.2fr)}
+.worksheet{background:white;padding:16px 24px;scroll-behavior:smooth}
+.worksheet-heading{font-size:12px;font-weight:bold;color:var(--teal);margin-bottom:16px}
+.worksheet .body{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:var(--textsize);line-height:2}
+.worksheet p{margin:0 0 14px;overflow-wrap:anywhere}
+.worksheet table{width:100%;border-collapse:collapse;font-size:.86em;margin:12px 0 24px}
+.worksheet td{border:1px solid #a7b4bf;vertical-align:top;padding:9px 10px;min-width:100px}
+.worksheet tr:first-child{background:#f2f6f9}
+.written-blank{min-width:90px;min-height:34px;white-space:normal;text-align:left;max-width:100%;padding:3px 9px}
+.blank-code{font-family:Arial,sans-serif;font-size:10px;color:#566b7b;display:block;line-height:1}
+.blank-value{display:block;min-height:17px;font-size:.85em;line-height:1.5;overflow-wrap:anywhere}
+.written-fields .field input{width:100%;font-size:16px;padding:10px 8px;border:1px solid #aebfcd;border-radius:3px;background:white;color:var(--ink)}
+.written-fields .field label{font-size:12px;line-height:1.7}
+@media(max-width:720px){.center.written-center,.review-mode .center.written-center{display:flex}.written-center .paper{max-height:55dvh;overflow:auto;min-height:200px}.written-center .worksheet{max-height:65dvh;min-height:260px;resize:vertical}.written-fields{display:block}.worksheet{padding:16px}.worksheet .body{font-size:var(--textsize)}}
